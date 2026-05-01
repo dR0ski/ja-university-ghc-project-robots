@@ -1,0 +1,10 @@
+<footer class="footer">
+  <div class="container footer__inner">
+    <p class="footer__brand">© {{ current_year }} {{ site_name }}.</p>
+    <ul class="footer__links cluster" role="list">
+      <li><a href="{{ url_for('public.legal_stub', _anchor='terms') if false else '/terms' }}">Terms</a></li>
+      <li><a href="/privacy">Privacy</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </div>
+</footer>

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block meta %}
+  <title>Register — {{ site_name }}</title>
+  <meta name="description" content="Create your {{ site_name }} account." />
+  <meta name="robots" content="noindex,nofollow" />
+{% endblock %}
+
+{% block content %}
+  <section class="auth-shell">
+    <div class="container">
+      <form class="form stack" method="post"
+            action="{{ url_for('auth.register') }}" novalidate
+            aria-labelledby="register-title">
+        {{ form.hidden_tag() }}
+
+        <header class="form__header stack stack--tight">
+          <h1 id="register-title" class="form__title">Create your account</h1>
+          <p class="form__subtitle">Free. Takes 30 seconds.</p>
+        </header>
+
+        {# Honeypot — hidden visually + from AT, but a real input bots will fill. #}
+        <div class="honeypot" aria-hidden="true">
+          <label for="{{ form.website.id }}">Leave this empty</label>
+          {{ form.website(id=form.website.id, tabindex="-1") }}
+        </div>
+
+        {% set fields = [form.email, form.display_name, form.password, form.password_confirm] %}
+        {% for field in fields %}
+          <div class="form__field">
+            <label for="{{ field.id }}">{{ field.label.text }}</label>
+            {{ field(
+                **({"aria-invalid": "true", "aria-describedby": field.id ~ "-error"} if field.errors else {})
+            ) }}
+            {% if field.errors %}
+              <p class="form__error" id="{{ field.id }}-error" aria-live="polite">
+                {{ field.errors[0] }}
+              </p>
+            {% endif %}
+          </div>
+        {% endfor %}
+
+        <div class="form__field form__field--inline">
+          {{ form.accept_terms(
+              **({"aria-invalid": "true", "aria-describedby": form.accept_terms.id ~ "-error"} if form.accept_terms.errors else {})
+          ) }}
+          <label for="{{ form.accept_terms.id }}">
+            I accept the <a href="/terms">Terms</a> and <a href="/privacy">Privacy Policy</a>.
+          </label>
+          {% if form.accept_terms.errors %}
+            <p class="form__error" id="{{ form.accept_terms.id }}-error" aria-live="polite">
+              {{ form.accept_terms.errors[0] }}
+            </p>
+          {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--block" data-disable-on-submit>
+          Create account
+        </button>
+
+        <p class="form__hint">
+          By creating an account you agree to receive product emails. You can opt out anytime.
+        </p>
+      </form>
+    </div>
+  </section>
+{% endblock %}

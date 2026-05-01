@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block head_preload %}
+  <link rel="preload" as="image"
+        href="{{ url_for('static', filename='media/hero-poster.jpg') }}" />
+{% endblock %}
+
+{% block content %}
+  <section class="hero">
+    <video class="hero__video"
+           autoplay muted loop playsinline preload="metadata"
+           poster="{{ url_for('static', filename='media/hero-poster.jpg') }}"
+           aria-hidden="true">
+      <source src="{{ url_for('static', filename='media/hero.webm') }}" type="video/webm" />
+      <source src="{{ url_for('static', filename='media/hero.mp4') }}" type="video/mp4" />
+    </video>
+    <div class="hero__overlay" aria-hidden="true"></div>
+
+    <div class="hero__content container stack stack--snug">
+      <p class="hero__eyebrow">Robot media, made loud.</p>
+      <h1 class="hero__headline">
+        <span class="brand-glitch" data-text="Capture.">Capture.</span>
+        <span class="brand-glitch" data-text="Post.">Post.</span>
+        <span class="brand-glitch" data-text="Share.">Share.</span>
+      </h1>
+      <p class="hero__sub">
+        Publish videos and images of your robot in seconds. Built for makers,
+        tuned for the feed.
+      </p>
+      <div class="cluster cluster--tight">
+        <a class="btn btn--primary btn--lg" href="{{ url_for('auth.register') }}">
+          Get started
+        </a>
+        <a class="btn btn--ghost btn--lg" href="#features">See how it works</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="features container">
+    <h2 class="section-title">What you get</h2>
+    <div class="features__grid">
+      <article class="feature-card">
+        <h3 class="feature-card__title">Capture</h3>
+        <p>Stream straight from your robot. Vertical-first, mobile-ready.</p>
+      </article>
+      <article class="feature-card">
+        <h3 class="feature-card__title">Publish</h3>
+        <p>One tap to post. Posters, captions, and music — handled.</p>
+      </article>
+      <article class="feature-card">
+        <h3 class="feature-card__title">Share</h3>
+        <p>Open links, embed-ready pages, no tracking, no nonsense.</p>
+      </article>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,10 @@
+<nav class="nav" aria-label="Primary">
+  <div class="nav__inner container">
+    <a class="nav__brand" href="{{ url_for('public.splash') }}">
+      <span class="brand-glitch" data-text="{{ site_name }}">{{ site_name }}</span>
+    </a>
+    <div class="nav__actions cluster">
+      <a class="btn btn--primary" href="{{ url_for('auth.register') }}">Register</a>
+    </div>
+  </div>
+</nav>
