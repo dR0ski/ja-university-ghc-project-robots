@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block meta %}<title>Forbidden — {{ site_name }}</title>{% endblock %}
+{% block content %}
+<section class="auth-shell"><div class="container"><div class="form stack">
+  <h1 class="form__title">Forbidden.</h1>
+  <p class="form__hint">Reference: <code>{{ request_id }}</code></p>
+  <a class="btn btn--ghost" href="{{ url_for('public.splash') }}">Home</a>
+</div></div></section>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block meta %}
+  <title>Almost there — {{ site_name }}</title>
+  <meta name="robots" content="noindex,nofollow" />
+{% endblock %}
+
+{% block content %}
+  <section class="auth-shell">
+    <div class="container">
+      <div class="form stack">
+        <h1 class="form__title">Thanks — you're in.</h1>
+        <p>
+          If your email is new, your account is being set up. You'll hear from us shortly.
+        </p>
+        <a class="btn btn--ghost" href="{{ url_for('public.splash') }}">Back to home</a>
+      </div>
+    </div>
+  </section>
+{% endblock %}
