@@ -36,13 +36,11 @@ class BaseConfig:
 
     # --- Database ---
     SQLALCHEMY_DATABASE_URI: str = os.environ.get(
-        "DATABASE_URL", "postgresql+psycopg://robot:robot@db:5432/robot"
+        "DATABASE_URL", "sqlite:///robotik.db"
     )
     SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
     SQLALCHEMY_ENGINE_OPTIONS: dict[str, Any] = {
         "pool_pre_ping": True,
-        "pool_size": 10,
-        "max_overflow": 20,
         "pool_recycle": 1800,
     }
 
@@ -62,7 +60,7 @@ class BaseConfig:
 
     # --- Rate limiter ---
     RATELIMIT_STORAGE_URI: str = os.environ.get("RATELIMIT_STORAGE_URI", "memory://")
-    RATELIMIT_STRATEGY: str = "fixed-window-elastic-expiry"
+    RATELIMIT_STRATEGY: str = "fixed-window"
     RATELIMIT_HEADERS_ENABLED: bool = True
     RATELIMIT_DEFAULT: str = "200 per hour;50 per minute"
 
